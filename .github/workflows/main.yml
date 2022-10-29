@@ -1,0 +1,56 @@
+name: Push to DockerHub & Scan for CIS Compliance
+
+on: [push]
+
+permissions: write-all
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: docker login
+      env:
+        DOCKER_USER: ${{secrets.DOCKERHUB_USERNAME}}
+        DOCKER_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag hackai87/jenkins01
+
+    - name: Docker Push
+      run: docker push ${{secrets.DOCKERHUB_USERNAME}}/jenkins01
+      
+
+  dockle:
+    name: Dockle Container Analysis
+    needs: push
+    runs-on: ubuntu-latest
+    steps:
+       # Makes sure your .dockleignore file is available to the next step
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Here you might use a docker login action, or something else
+      - name: Authenticate to DockHub
+        uses: docker/login-ation@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Run Dockle
+        uses: erzz/dockle-action@v1
+        with:
+          image: ${{secrets.DOCKERHUB_USERNAME}}/pre_flight_check
+          report-format: sarif
+          report-name: super-report
+          failure-threshold: fatal
+          exit-code: 1
+          dockle-version: 0.3.16
+          accept-extensions: pem
+
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v1.2.0
+        with:
+          sarif_file: super-report.sarif
