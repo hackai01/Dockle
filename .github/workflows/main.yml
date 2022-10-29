@@ -20,7 +20,7 @@ jobs:
       run: docker build . --file Dockerfile --tag hackai87/pre_flight_check
 
     - name: Docker Push
-      run: docker push ${{secrets.DOCKERHUB_USERNAME}}/pre_flight_Check
+      run: docker push ${{secrets.DOCKERHUB_USERNAME}}/pre_flight_check
       
 
   dockle:
