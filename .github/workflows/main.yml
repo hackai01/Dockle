@@ -17,10 +17,10 @@ jobs:
       run: |
         docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag hackai87/jenkins01
+      run: docker build . --file Dockerfile --tag hackai87/pre_flight_check
 
     - name: Docker Push
-      run: docker push ${{secrets.DOCKERHUB_USERNAME}}/jenkins01
+      run: docker push ${{secrets.DOCKERHUB_USERNAME}}/pre_flight_Check
       
 
   dockle:
