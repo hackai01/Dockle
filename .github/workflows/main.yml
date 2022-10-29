@@ -47,7 +47,7 @@ jobs:
           report-format: sarif
           report-name: super-report
           failure-threshold: info
-          exit-code: 0
+          exit-code: 1
           dockle-version: 0.3.16
           accept-extensions: pem
 
