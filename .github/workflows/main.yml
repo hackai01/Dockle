@@ -42,7 +42,7 @@ jobs:
 
       - name: Run Dockle
         uses: erzz/dockle-action@v1
-        id: dockle
+        id: dockle-report
         with:
           image: ${{secrets.DOCKERHUB_USERNAME}}/pre_flight_check
           report-format: sarif
@@ -55,4 +55,4 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         if: always()
         with:
-          sarif_file: dockle-report.sarif
+          sarif_file: ${{ steps.dockle-report.outputs.sarif }}
