@@ -14,4 +14,5 @@ COPY app.py app.py
 CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 
 HEALTHCHECK --interval=5m --timeout=3s \
-  CMD curl -f http://localhost/ || exit 1
+
+CMD curl -f http://localhost/ || exit 1
