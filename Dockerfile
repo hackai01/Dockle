@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY requirements.txt requirements.txt
 
-RUN apt-get update && apt-get install -y package-a
+RUN apt-get update -y && apt-get upgrade -y
 
 RUN pip3 install -r requirements.txt
 
