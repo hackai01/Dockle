@@ -55,4 +55,4 @@ jobs:
         uses: github/codeql-action/upload-sarif@v2
         if: always()
         with:
-          sarif_file: ${{ steps.dockle-report.outputs.sarif }}
+          sarif_file: dockle-report.sarif
