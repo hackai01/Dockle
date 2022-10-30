@@ -51,6 +51,7 @@ jobs:
           exit-code: 0
           dockle-version: 0.3.16
           accept-extensions: pem
+          acs-report-enable: true
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
