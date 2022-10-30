@@ -50,7 +50,6 @@ jobs:
           failure-threshold: warn
           exit-code: 0
           accept-extensions: pem
-          acs-report-enable: true
 
       - name: Upload SARIF file
         uses: github/codeql-action/upload-sarif@v2
