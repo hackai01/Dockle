@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY requirements.txt requirements.txt
 
-RUN apt update -y && apt-get install|upgrade' : /bin/sh -c apt update -y && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt update -y && apt-get install|upgrade' : /bin/sh -c apt update -y && apt-get clean && rm -rf /var/lib/apt/lists/*'
 
 RUN pip3 install -r requirements.txt
 
